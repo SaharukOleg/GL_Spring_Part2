@@ -1,32 +1,45 @@
-package study.basecamp;
+package study.basecamp.classImpl;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
+import study.basecamp.Game;
+import study.basecamp.NumberGenerator;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
+@Getter
+@Setter
 public class GameImpl implements Game {
 
     private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
 
     @Autowired
     private NumberGenerator numberGenerator;
-
-    private int guessCount = 10;
+    //    @Value("${guessCount}")
+    private int guessCount;
     private int number;
     private int guess;
     private int smallest;
     private int biggest;
     private int remainingGuesses;
     private boolean validNumberRange = true;
+    //   @Value("${limit}")
+    private int limit= 10; // винести
 
-    private int limit = 10; // винести
+    public GameImpl() {
+    }
+
+    public GameImpl(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+    }
+
 
     @PostConstruct
     @Override
@@ -58,6 +71,7 @@ public class GameImpl implements Game {
     public void setGuess(int guess) {
         this.guess = guess;
     }
+
 
     @Override
     public int getSmallest() {

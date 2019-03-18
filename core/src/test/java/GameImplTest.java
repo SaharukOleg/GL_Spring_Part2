@@ -1,21 +1,15 @@
 
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.classic.spi.LoggingEvent;
-import ch.qos.logback.core.read.ListAppender;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.LoggerFactory;
-import study.basecamp.GameImpl;
-import sun.rmi.log.LogHandler;
+import study.basecamp.Game;
+import study.basecamp.classImpl.GameImpl;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.lang.reflect.Executable;
+import java.util.InputMismatchException;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import static org.junit.Assert.assertNotEquals;
 
 
 public class GameImplTest {
@@ -23,21 +17,16 @@ public class GameImplTest {
     private static GameImpl gameImpl;
 
     @BeforeAll
-    public static void init(){
+    public static void init() {
         gameImpl = new GameImpl();
 
     }
 
-    @Before
-    public void setup() {
-
-    }
-
     @Test
-    public void checkValidNumberRange(){
-                Assertions.assertEquals(gameImpl.isValidNumberRange(),true);
-                Assertions.assertTrue(gameImpl.isValidNumberRange());
+    public void checkValidNumberRange() {
+        Assertions.assertTrue(gameImpl.isValidNumberRange());
     }
+
     @Test
     public void testCheckUserIn() {
         final int expected = 8;
@@ -51,6 +40,27 @@ public class GameImplTest {
         });
     }
 
+    @Test
+    public void isGameWon() {
+        gameImpl.setGuess(30);
+        gameImpl.setNumber(30);
+
+        Assert.assertTrue(gameImpl.isGameWon());
+    }
+
+    @Test
+    public void guessIsSmallerThanZeroTest() {
+        gameImpl.setGuess(-1);
+        gameImpl.check();
+
+        Assert.assertFalse(gameImpl.isValidNumberRange());
+    }
+
+    @Test()
+    public void guessIsCharTest() {
+        Exception exception1 = new NumberFormatException();
+        Assertions.assertThrows(exception1.getClass(), () -> gameImpl.setGuess(Integer.parseInt("a")));
+    }
 
 
 }

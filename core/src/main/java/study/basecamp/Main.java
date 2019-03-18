@@ -2,14 +2,13 @@ package study.basecamp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import study.basecamp.classImpl.GameImpl;
 
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
-    private static final String CONFIG_LOCATION = "beans.xml";
 
 
 
@@ -17,12 +16,10 @@ public class Main {
         log.info("Guess Number");
 
         // create context
-        ConfigurableApplicationContext context
-                = new ClassPathXmlApplicationContext(CONFIG_LOCATION);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanCreator.class);
 
-     //    get bean
-        NumberGenerator numberGenerator
-                = context.getBean("numberGenerator", NumberGenerator.class);
+//        NumberGenerator numberGenerator
+//                = context.getBean("numberGenerator", NumberGenerator.class);
 
 
         //get bean my
@@ -34,13 +31,11 @@ public class Main {
         int guess = gameImp.checkUserIn();
         log.info("My guess = {}", guess);
 
-        // get bean
 
-        Game game = context.getBean(Game.class);
 
-        game.setGuess(guess);
 
-        log.info("Result = {}", game.isGameWon() ? "Win" : "Lose");
+
+      //  log.info("Result = {}", gameImp.isGameWon() ? "Win" : "Lose");
 
         // close context
         context.close();

@@ -1,4 +1,6 @@
-package study.basecamp;
+package study.basecamp.classImpl;
+
+import study.basecamp.NumberGenerator;
 
 import java.util.Random;
 

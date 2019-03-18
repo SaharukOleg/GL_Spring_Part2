@@ -5,8 +5,8 @@
         </encoder>
     </appender>
 
-    <logger name="study.basecamp" level="DEBUG"/>
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="study.basecamp" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
