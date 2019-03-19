@@ -3,11 +3,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import study.basecamp.Game;
-import study.basecamp.classImpl.GameImpl;
-
-import java.lang.reflect.Executable;
-import java.util.InputMismatchException;
+import study.basecamp.GameImpl;
 
 import static org.junit.Assert.assertNotEquals;
 

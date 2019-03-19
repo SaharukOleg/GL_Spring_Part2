@@ -1,9 +1,11 @@
-package study.basecamp.classImpl;
+package study.basecamp;
 
+import org.springframework.stereotype.Component;
 import study.basecamp.NumberGenerator;
 
 import java.util.Random;
 
+@Component
 public class NumberGeneratorImpl implements NumberGenerator {
 
     private final Random random = new Random();

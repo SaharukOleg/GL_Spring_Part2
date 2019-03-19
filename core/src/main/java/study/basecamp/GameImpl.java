@@ -1,13 +1,13 @@
-package study.basecamp.classImpl;
+package study.basecamp;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import study.basecamp.Game;
-import study.basecamp.NumberGenerator;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -16,6 +16,9 @@ import java.util.Scanner;
 
 @Getter
 @Setter
+@Component
+@PropertySource("classpath:config.properties")
+@ConfigurationProperties
 public class GameImpl implements Game {
 
     private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
@@ -30,8 +33,8 @@ public class GameImpl implements Game {
     private int biggest;
     private int remainingGuesses;
     private boolean validNumberRange = true;
-    //   @Value("${limit}")
-    private int limit= 10; // винести
+ //   @Value("${limit}")
+    private int limit=10; // винести
 
     public GameImpl() {
     }

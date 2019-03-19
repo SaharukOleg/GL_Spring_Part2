@@ -2,45 +2,32 @@ package study.basecamp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import study.basecamp.classImpl.GameImpl;
+import study.basecamp.configs.ApplicationConfigs;
 
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
-
-
+    private static Game game;
 
     public static void main(String[] args) {
+        init();
         log.info("Guess Number");
 
-        // create context
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanCreator.class);
 
-//        NumberGenerator numberGenerator
-//                = context.getBean("numberGenerator", NumberGenerator.class);
+        game.checkUserIn();
 
 
-        //get bean my
-        GameImpl gameImp = context.getBean(GameImpl.class);
-        // biz logic
-        // int guess = numberGenerator.next(); // було
+        log.info("Result = {}", game.isGameWon() ? "Win" : "Lose");
 
 
-        int guess = gameImp.checkUserIn();
-        log.info("My guess = {}", guess);
+    }
 
-
-
-
-
-      //  log.info("Result = {}", gameImp.isGameWon() ? "Win" : "Lose");
-
-        // close context
-        context.close();
-
-
+    private static void init() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfigs.class); // от тобі config класс створи мені будь ласка по ньому контекст
+        game = context.getBean(Game.class);
 
     }
 }
