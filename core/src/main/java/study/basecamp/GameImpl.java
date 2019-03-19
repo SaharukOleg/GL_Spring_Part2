@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -25,16 +26,16 @@ public class GameImpl implements Game {
 
     @Autowired
     private NumberGenerator numberGenerator;
-    //    @Value("${guessCount}")
     private int guessCount;
     private int number;
     private int guess;
     private int smallest;
     private int biggest;
     private int remainingGuesses;
-    private boolean validNumberRange = true;
- //   @Value("${limit}")
-    private int limit=10; // винести
+    @Value("${validNumberRange}")
+    private boolean validNumberRange;
+    @Value("${limit}")
+    private int limit; // винести
 
     public GameImpl() {
     }
@@ -116,7 +117,7 @@ public class GameImpl implements Game {
 
             try {
                 guess = new Scanner(System.in).nextInt();
-                if (guess == number) {
+                if (isGameWon()) {
                     System.out.println("YOU WIN !!!");
                     break;
                 } else {
@@ -128,7 +129,6 @@ public class GameImpl implements Game {
                 } else System.out.println("Too Low. Try a higher number.");
             } catch (InputMismatchException ex) {
                 System.out.println("enter digits !!!");
-                continue;
             }
         }
         return guess;
