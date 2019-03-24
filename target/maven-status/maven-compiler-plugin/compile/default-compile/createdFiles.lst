@@ -1,0 +1,6 @@
+study/basecamp/wire/GameResponse.class
+study/basecamp/service/GameService.class
+study/basecamp/web/controller/GoodbyeXmlController.class
+study/basecamp/config/WebMvcConfig.class
+study/basecamp/config/GoodbyeXmlAppInitializer.class
+study/basecamp/config/AppConfig.class
